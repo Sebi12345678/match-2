@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17156" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina3_5" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StarsView" customModule="Match22" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Sjb-7o-eMu"/>
+                <outlet property="firstStar" destination="UGS-Mb-fW8" id="IDv-Ba-xQC"/>
+                <outlet property="secondStar" destination="HnO-Ef-S6U" id="RRA-gS-bg7"/>
+                <outlet property="thirdStar" destination="PHM-Et-IuU" id="vj9-pS-2Tu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="457" height="194"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="8a9-fd-FkS">
+                    <rect key="frame" x="4" y="4" width="449" height="186"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-image" translatesAutoresizingMaskIntoConstraints="NO" id="UGS-Mb-fW8">
+                            <rect key="frame" x="0.0" y="0.0" width="147" height="186"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-image-dis" translatesAutoresizingMaskIntoConstraints="NO" id="HnO-Ef-S6U">
+                            <rect key="frame" x="151" y="0.0" width="147" height="186"/>
+                        </imageView>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star-image-dis" translatesAutoresizingMaskIntoConstraints="NO" id="PHM-Et-IuU">
+                            <rect key="frame" x="302" y="0.0" width="147" height="186"/>
+                        </imageView>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="8a9-fd-FkS" secondAttribute="bottom" constant="4" id="KMt-fX-Ws6"/>
+                <constraint firstItem="8a9-fd-FkS" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="4" id="dhH-KK-xV5"/>
+                <constraint firstItem="8a9-fd-FkS" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="hKy-I4-lBX"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8a9-fd-FkS" secondAttribute="trailing" constant="4" id="l0V-9U-89D"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="160.3125" y="-25"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="star-image" width="160" height="160"/>
+        <image name="star-image-dis" width="160" height="160"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
