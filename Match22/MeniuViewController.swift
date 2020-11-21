@@ -3,8 +3,6 @@
 //  Match2
 //
 //  Created by Sebi on 11/10/2020.
-// Sebi12345678
-//sebisebi1997
 
 import UIKit
 import FirebaseAuth

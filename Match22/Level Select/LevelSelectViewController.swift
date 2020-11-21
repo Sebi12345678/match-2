@@ -37,7 +37,7 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
         //return CGSize(width: 10, height: 10)
         let spacings : CGFloat = 10.0 * (CGFloat (numberOfColumns) + 1.0)
         let widthLeft = collectionView.frame.width - spacings
-        let cellSize = widthLeft/3
+        let cellSize = widthLeft/CGFloat(numberOfColumns)
         return CGSize(width: cellSize, height: cellSize)
     }
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, insetForSectionAt: Int) -> UIEdgeInsets {

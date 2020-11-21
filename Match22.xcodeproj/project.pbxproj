@@ -24,6 +24,8 @@
 		94188E072543366C00683ABF /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94188E062543366C00683ABF /* LoginViewController.swift */; };
 		94188E0A2543367500683ABF /* MeniuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94188E092543367500683ABF /* MeniuViewController.swift */; };
 		94188E0E2543369B00683ABF /* Player.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94188E0D2543369B00683ABF /* Player.swift */; };
+		94D1AB9525696D1C008BE8B9 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D1AB9425696D1C008BE8B9 /* GameViewController.swift */; };
+		94D1AB9825696FB3008BE8B9 /* GameCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94D1AB9725696FB3008BE8B9 /* GameCollectionViewCell.swift */; };
 		94DC8B1F2556F274009D03E2 /* LoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DC8B1E2556F274009D03E2 /* LoginManager.swift */; };
 		94F982B9254C696000BA45C3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 94F982B8254C696000BA45C3 /* GoogleService-Info.plist */; };
 		94F982CA254C740C00BA45C3 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94F982C9254C740C00BA45C3 /* LoadingViewController.swift */; };
@@ -50,6 +52,8 @@
 		94188E062543366C00683ABF /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		94188E092543367500683ABF /* MeniuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeniuViewController.swift; sourceTree = "<group>"; };
 		94188E0D2543369B00683ABF /* Player.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Player.swift; sourceTree = "<group>"; };
+		94D1AB9425696D1C008BE8B9 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
+		94D1AB9725696FB3008BE8B9 /* GameCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCollectionViewCell.swift; sourceTree = "<group>"; };
 		94DC8B1E2556F274009D03E2 /* LoginManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginManager.swift; sourceTree = "<group>"; };
 		94F982B8254C696000BA45C3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		94F982C9254C740C00BA45C3 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
@@ -108,6 +112,7 @@
 		94188DDD254335B300683ABF /* Match22 */ = {
 			isa = PBXGroup;
 			children = (
+				94D1AB9325696CAC008BE8B9 /* Game */,
 				94DC8B1D2556F23A009D03E2 /* Managers */,
 				94188E0C2543369B00683ABF /* Model */,
 				94188DF42543364700683ABF /* Highscores */,
@@ -155,6 +160,15 @@
 				94188E0D2543369B00683ABF /* Player.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		94D1AB9325696CAC008BE8B9 /* Game */ = {
+			isa = PBXGroup;
+			children = (
+				94D1AB9425696D1C008BE8B9 /* GameViewController.swift */,
+				94D1AB9725696FB3008BE8B9 /* GameCollectionViewCell.swift */,
+			);
+			path = Game;
 			sourceTree = "<group>";
 		};
 		94DC8B1D2556F23A009D03E2 /* Managers */ = {
@@ -290,8 +304,10 @@
 				94DC8B1F2556F274009D03E2 /* LoginManager.swift in Sources */,
 				94188DF82543364700683ABF /* HighscoresViewController.swift in Sources */,
 				94188DDF254335B300683ABF /* AppDelegate.swift in Sources */,
+				94D1AB9825696FB3008BE8B9 /* GameCollectionViewCell.swift in Sources */,
 				94188E022543365800683ABF /* LevelCollectionViewCell.swift in Sources */,
 				940E81A625603FB90020DBBB /* RegisterViewController.swift in Sources */,
+				94D1AB9525696D1C008BE8B9 /* GameViewController.swift in Sources */,
 				94188DF72543364700683ABF /* HighscoresTableViewCell.swift in Sources */,
 				94188E012543365800683ABF /* StarsView.swift in Sources */,
 				94188DE1254335B300683ABF /* SceneDelegate.swift in Sources */,
