@@ -15,13 +15,19 @@ class GameViewController: UIViewController {
     var cellSpacing : CGFloat = 10
     var selectedCellsCount = 0
     var selectedCells = [IndexPath]()
-    
+    var matchNumbers = [Int]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isScrollEnabled = false
+        let firstSequence = ([Int] (1...(numberOfColumns*numberOfRows)/2)).shuffled()
+        let secondSequence = ([Int] (1...(numberOfColumns*numberOfRows)/2)).shuffled()
+        matchNumbers.append(contentsOf: firstSequence)
+        matchNumbers.append(contentsOf: secondSequence)
+        matchNumbers.shuffle()
+        print(matchNumbers)
     }
 }
 extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
@@ -31,13 +37,21 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionViewCell", for: indexPath) as! GameCollectionViewCell
-        cell.contentView.backgroundColor = UIColor.cyan
-        
+        //cell.contentView.backgroundColor = UIColor.cyan
+        cell.matchNumber = matchNumbers[indexPath.row]
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as? GameCollectionViewCell
         
+        if(selectedCells.count == 1)
+        {
+            let firstCell = collectionView.cellForItem(at: selectedCells[0]) as? GameCollectionViewCell
+            if(firstCell?.matchNumber == cell?.matchNumber && firstCell != cell)
+            {
+                print("felicitari ai castigat un televizor pe lampa de gaz")
+            }
+        }
         if(selectedCells.count == 2)
         {
             let firstCell = collectionView.cellForItem(at: selectedCells[0]) as? GameCollectionViewCell

@@ -359,7 +359,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mnu-MD-4qj">
                                 <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="W5z-MU-6HF">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="W5z-MU-6HF">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -369,10 +369,33 @@
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="GameCollectionViewCell" id="nmO-VX-KDS" customClass="GameCollectionViewCell" customModule="Match22" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="j30-MQ-AmH">
+                                        <collectionViewCellContentView key="contentView" autoresizesSubviews="NO" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="j30-MQ-AmH">
                                             <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView hidden="YES" autoresizesSubviews="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_m2" translatesAutoresizingMaskIntoConstraints="NO" id="VNs-Pc-avx">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LNz-yG-LTs">
+                                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                    <color key="backgroundColor" systemColor="systemPurpleColor"/>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="VNs-Pc-avx" secondAttribute="trailing" id="EVj-KR-MBT"/>
+                                                <constraint firstItem="LNz-yG-LTs" firstAttribute="leading" secondItem="j30-MQ-AmH" secondAttribute="leading" id="Isr-54-LBH"/>
+                                                <constraint firstAttribute="bottom" secondItem="LNz-yG-LTs" secondAttribute="bottom" id="Tt7-qp-FcP"/>
+                                                <constraint firstAttribute="bottom" secondItem="VNs-Pc-avx" secondAttribute="bottom" id="aYJ-WZ-6Y3"/>
+                                                <constraint firstItem="LNz-yG-LTs" firstAttribute="top" secondItem="j30-MQ-AmH" secondAttribute="top" id="iBc-0o-boe"/>
+                                                <constraint firstItem="VNs-Pc-avx" firstAttribute="top" secondItem="j30-MQ-AmH" secondAttribute="top" id="nLP-FI-zzh"/>
+                                                <constraint firstItem="VNs-Pc-avx" firstAttribute="leading" secondItem="j30-MQ-AmH" secondAttribute="leading" id="odi-zl-spS"/>
+                                                <constraint firstAttribute="trailing" secondItem="LNz-yG-LTs" secondAttribute="trailing" id="rbS-dw-JaM"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
+                                        <connections>
+                                            <outlet property="backCardView" destination="LNz-yG-LTs" id="NyE-wI-uTI"/>
+                                            <outlet property="frontCardView" destination="VNs-Pc-avx" id="GE9-eI-gb4"/>
+                                        </connections>
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
