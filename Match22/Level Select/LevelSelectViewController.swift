@@ -7,12 +7,13 @@
 
 import UIKit
 
+
 class LevelSelectViewController: UIViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
     let numberOfColumns = 3
     
-    
+    let difficulties = ["easy": [4, 6],"medium": [5, 8], "hard": [6, 10]]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +33,21 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LevelCollectionViewCell", for: indexPath) as! LevelCollectionViewCell
         cell.configureCell(nrLvl: indexPath.row+1, dif: Int.random(in: 1...3))
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
+    {
+        let cell = collectionView.cellForItem(at: indexPath) as? LevelCollectionViewCell
+    
+        switch cell?.difficulty {
+        case 1:
+            print(difficulties["easy"])
+        case 2:
+            print(difficulties["medium"])
+        case 3:
+            print(difficulties["hard"])
+        default:
+            break
+        }
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         //return CGSize(width: 10, height: 10)

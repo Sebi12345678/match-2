@@ -49,7 +49,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             let firstCell = collectionView.cellForItem(at: selectedCells[0]) as? GameCollectionViewCell
             if(firstCell?.matchNumber == cell?.matchNumber && firstCell != cell)
             {
-                print("felicitari ai castigat un televizor pe lampa de gaz")
+                print("")
             }
         }
         if(selectedCells.count == 2)

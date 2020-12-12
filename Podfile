@@ -8,5 +8,6 @@ target 'Match22' do
   # Pods for Match22
   pod 'Firebase/Analytics'
   pod 'Firebase/Auth'
+  pod 'Firebase/Storage'
 
 end

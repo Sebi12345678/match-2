@@ -212,13 +212,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m5f-1A-blZ">
+                                <rect key="frame" x="157" y="573" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="W1c-fd-NKD"/>
+                                    <constraint firstAttribute="height" constant="100" id="fQs-EI-AyV"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Zvm-8W-mzb"/>
                         <color key="backgroundColor" systemColor="systemPurpleColor"/>
                         <constraints>
+                            <constraint firstItem="m5f-1A-blZ" firstAttribute="top" secondItem="wrY-eL-E0a" secondAttribute="bottom" constant="135" id="0CT-jE-zJ1"/>
                             <constraint firstItem="4gy-dL-FuD" firstAttribute="leading" secondItem="Zvm-8W-mzb" secondAttribute="leading" constant="50" id="Goa-BO-Ffy"/>
                             <constraint firstItem="O0Q-8a-LAF" firstAttribute="leading" secondItem="Zvm-8W-mzb" secondAttribute="leading" constant="20" id="H47-yh-MSe"/>
                             <constraint firstItem="4gy-dL-FuD" firstAttribute="bottom" secondItem="Zvm-8W-mzb" secondAttribute="bottom" constant="-50" id="ImL-Mr-N2G"/>
+                            <constraint firstItem="m5f-1A-blZ" firstAttribute="centerX" secondItem="Zvm-8W-mzb" secondAttribute="centerX" id="KsM-1k-wLg"/>
                             <constraint firstItem="wrY-eL-E0a" firstAttribute="top" secondItem="Zvm-8W-mzb" secondAttribute="top" constant="200" id="Pwl-pV-EGI"/>
                             <constraint firstItem="O0Q-8a-LAF" firstAttribute="top" secondItem="Zvm-8W-mzb" secondAttribute="top" constant="20" id="dYf-ZT-46z"/>
                             <constraint firstItem="Zvm-8W-mzb" firstAttribute="trailing" secondItem="4gy-dL-FuD" secondAttribute="trailing" constant="50" id="dxC-Fx-ib3"/>
@@ -228,6 +237,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="MENIU" id="ZvH-Ni-wIp"/>
                     <connections>
+                        <outlet property="testImageView" destination="m5f-1A-blZ" id="Bb9-4T-cQA"/>
                         <outlet property="userNameLabel" destination="O0Q-8a-LAF" id="EVM-5T-aLf"/>
                     </connections>
                 </viewController>

@@ -6,16 +6,24 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseStorage
 
 class MeniuViewController: UIViewController {
 
     @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var testImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-
         userNameLabel.text = LoginManager.shared.userId
+        
+        StorageManager.shared.getImage(name: "disruptor.jpg", completion: {
+            image in self.testImageView.image = image
+        })
+        
+        
+        
     }
-
+    
     @IBAction func logoutAction(_ sender: Any) {
         LoginManager.shared.userId = nil
         LoginManager.shared.isLoggedIn = false
