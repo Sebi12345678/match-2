@@ -25,6 +25,8 @@ class StorageManager: NSObject {
         let storage = Storage.storage()
         let pathReference = storage.reference(withPath: name)
         
+        
+        //to do: fix firebase downloading multiple files
         let url = self.getDocumentsDirectory().appendingPathComponent(name)
         let downloadTask = pathReference.write(toFile: url) { _, error in
           if let error = error {

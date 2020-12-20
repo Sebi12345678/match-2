@@ -12,6 +12,13 @@ class GameCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var frontCardView: UIImageView!
     var matchNumber = 0
     var isRotated = false
+    var willDisappear = false
+    func disappear(){
+        isUserInteractionEnabled = false
+        UIView.animate(withDuration: 2, animations: {
+            self.alpha = 0
+        })
+    }
     func reveal(){
         
         CATransaction.begin()
@@ -22,6 +29,10 @@ class GameCollectionViewCell: UICollectionViewCell {
                 self.frontCardView.transform = CGAffineTransform(scaleX: 0.0, y: 1.0)
                 UIView.animate(withDuration: 1, animations: {
                     self.frontCardView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
+                }, completion: {_ in if(self.willDisappear)
+                {
+                    self.disappear()
+                }
                 })
             }
         })
@@ -42,7 +53,7 @@ class GameCollectionViewCell: UICollectionViewCell {
             
             
 }
-        else{
+        else if(!willDisappear){
             self.frontCardView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
             UIView.animate(withDuration: 1, animations: {
                 self.frontCardView.transform = CGAffineTransform(scaleX: 0.01, y: 1.0)

@@ -24,6 +24,14 @@ class LevelSelectViewController: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    func goToGame (boardSize: [Int]?, difficulty: String){
+        if let viewController = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController, let boardSize = boardSize{
+            viewController.numberOfColumns = boardSize[0]
+            viewController.numberOfRows = boardSize[1]
+            viewController.difficulty = difficulty
+            navigationController?.pushViewController(viewController, animated: true)
+        }
+    }
 }
 extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -40,11 +48,11 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
     
         switch cell?.difficulty {
         case 1:
-            print(difficulties["easy"])
+            goToGame(boardSize: difficulties["easy"], difficulty: "easy")
         case 2:
-            print(difficulties["medium"])
+            goToGame(boardSize: difficulties["medium"], difficulty: "medium")
         case 3:
-            print(difficulties["hard"])
+            goToGame(boardSize: difficulties["hard"], difficulty: "hard")
         default:
             break
         }

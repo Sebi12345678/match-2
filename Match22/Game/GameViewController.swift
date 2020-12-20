@@ -10,15 +10,23 @@ import UIKit
 class GameViewController: UIViewController {
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var difficultyLabel: UILabel!
+    @IBOutlet weak var scoreLabel: UILabel!
     var numberOfColumns = 5
     var numberOfRows = 8
     var cellSpacing : CGFloat = 10
     var selectedCellsCount = 0
     var selectedCells = [IndexPath]()
     var matchNumbers = [Int]()
+    var score = 0
+    var difficulty = "Random"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        difficultyLabel.text = "Difficulty: " + difficulty
+        
+        scoreLabel.text = "Score: \(score)" 
+        
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.isScrollEnabled = false
@@ -39,6 +47,11 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GameCollectionViewCell", for: indexPath) as! GameCollectionViewCell
         //cell.contentView.backgroundColor = UIColor.cyan
         cell.matchNumber = matchNumbers[indexPath.row]
+        //"pictures/\(cell.matchNumber).png"
+        print(cell.matchNumber)
+        StorageManager.shared.getImage(name: "pictures/\(cell.matchNumber).png", completion: {
+            image in cell.frontCardView.image = image
+        })
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -49,7 +62,20 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             let firstCell = collectionView.cellForItem(at: selectedCells[0]) as? GameCollectionViewCell
             if(firstCell?.matchNumber == cell?.matchNumber && firstCell != cell)
             {
-                print("")
+                print("un mesaj")
+                firstCell?.willDisappear = true
+                cell?.willDisappear = true
+                score += 10
+                scoreLabel.text = "Score: \(score)"
+                selectedCells.removeAll()
+                if(cell?.isRotated == false){
+                    cell?.reveal()
+                }
+                return
+            }
+            else{
+                score -= 1
+                scoreLabel.text = "Score: \(score)"
             }
         }
         if(selectedCells.count == 2)

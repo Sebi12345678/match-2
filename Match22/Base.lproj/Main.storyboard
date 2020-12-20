@@ -361,13 +361,13 @@
         <!--Match 2-->
         <scene sceneID="A7I-dB-vSe">
             <objects>
-                <viewController id="Cqh-fx-Bj2" customClass="GameViewController" customModule="Match22" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GameViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Cqh-fx-Bj2" customClass="GameViewController" customModule="Match22" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ryx-4Z-tyR">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Mnu-MD-4qj">
-                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <rect key="frame" x="0.0" y="138" width="414" height="724"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="W5z-MU-6HF">
                                     <size key="itemSize" width="128" height="128"/>
@@ -409,19 +409,44 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4ZH-vl-uF8">
+                                <rect key="frame" x="10" y="88" width="394" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqZ-Qh-uCu">
+                                        <rect key="frame" x="0.0" y="15" width="197" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfS-fa-h0O">
+                                        <rect key="frame" x="197" y="15" width="197" height="20.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="3HE-m3-A09"/>
+                                </constraints>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="NFq-xK-5fz"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="NFq-xK-5fz" firstAttribute="bottom" secondItem="Mnu-MD-4qj" secondAttribute="bottom" id="1ls-et-fJQ"/>
                             <constraint firstItem="Mnu-MD-4qj" firstAttribute="leading" secondItem="NFq-xK-5fz" secondAttribute="leading" id="34H-e1-XuV"/>
+                            <constraint firstItem="4ZH-vl-uF8" firstAttribute="leading" secondItem="NFq-xK-5fz" secondAttribute="leading" constant="10" id="Vqi-Dl-9Ii"/>
+                            <constraint firstItem="4ZH-vl-uF8" firstAttribute="top" secondItem="NFq-xK-5fz" secondAttribute="top" id="WUn-uL-R9H"/>
                             <constraint firstItem="NFq-xK-5fz" firstAttribute="trailing" secondItem="Mnu-MD-4qj" secondAttribute="trailing" id="YuN-Mk-LTd"/>
-                            <constraint firstItem="Mnu-MD-4qj" firstAttribute="top" secondItem="NFq-xK-5fz" secondAttribute="top" id="xhO-KE-APg"/>
+                            <constraint firstItem="Mnu-MD-4qj" firstAttribute="top" secondItem="4ZH-vl-uF8" secondAttribute="bottom" id="iJ8-Yj-EPh"/>
+                            <constraint firstItem="NFq-xK-5fz" firstAttribute="trailing" secondItem="4ZH-vl-uF8" secondAttribute="trailing" constant="10" id="x7a-MU-PM7"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Match 2" id="kh5-1k-dDH"/>
                     <connections>
                         <outlet property="collectionView" destination="Mnu-MD-4qj" id="YhY-lh-V1Z"/>
+                        <outlet property="difficultyLabel" destination="jqZ-Qh-uCu" id="QfG-VW-0vk"/>
+                        <outlet property="scoreLabel" destination="WfS-fa-h0O" id="RNk-sL-nRW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9i-Ck-Wmg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
