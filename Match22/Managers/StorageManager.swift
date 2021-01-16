@@ -28,20 +28,7 @@ class StorageManager: NSObject {
         
         //to do: fix firebase downloading multiple files
         let url = self.getDocumentsDirectory().appendingPathComponent(name)
-        let downloadTask = pathReference.write(toFile: url) { _, error in
-          if let error = error {
-            print(error)
-          } else {
-            do{
-            let imageData = try Data(contentsOf: url)
-            let image = UIImage(data: imageData)
-            completion(image!)
-            }
-            catch{
-               print(error)
-            }
-          }
-        }
+        
         
         if FileManager.default.fileExists(atPath: url.path) {
             do{
@@ -53,7 +40,13 @@ class StorageManager: NSObject {
                print(error)
             }
                 } else {
-                    downloadTask.resume()
+                    pathReference.getData(maxSize: 1024*1024*12) {
+                        (dataResponse, errorResponse) in
+                        if let data = dataResponse{
+                            let image = UIImage(data: data)
+                            completion(image!)
+                        }
+                    }
                 }
     }
 }
