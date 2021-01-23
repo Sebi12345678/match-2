@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class HighscoresViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
@@ -19,16 +20,31 @@ class HighscoresViewController: UIViewController {
         tableView.dataSource = self
         print("hingscore view did load")
         getPlayers()
-        tableView.reloadData()
+        
     }
     func getPlayers(){
-        players.append(contentsOf: [Player(nume: "Gigel", scor: 72),
-                       Player(nume: "Bob Bobinski", scor: 69),
-                       Player(nume: "Jeff", scor: 420),
-                       Player(nume: "Bobbe", scor: 30),
-                       Player(nume: "Bobby", scor: 20),
-                       Player(nume: "Bobert", scor: 10)]
-        )
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        
+        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
+            if let users = snapshot.value as? NSDictionary{
+                for user in users {
+                    if let userObject = user.value as? NSDictionary, let userId = user.key as? String{
+                    let score = userObject["score"] as? Double
+                    let name = userObject["name"] as? String
+                    
+                        self.players.append(Player(nume: name ?? "", scor: score ?? 0, id: userId))
+                    }
+                }
+                self.players.sort{$0.score ?? 0 > $1.score ?? 0}
+                //self.players.sort {$0.name!.compare($1.name!).rawValue != 0}
+                
+                self.tableView.reloadData()
+            }
+
+          }) { (error) in
+            print(error.localizedDescription)
+        }
     }
 }
 extension HighscoresViewController: UITableViewDelegate, UITableViewDataSource{
@@ -41,7 +57,12 @@ extension HighscoresViewController: UITableViewDelegate, UITableViewDataSource{
         if let cell = tableView.dequeueReusableCell(withIdentifier: "HighscoresTableViewCell") as? HighscoresTableViewCell{
         //return  HighscoresTableViewCell()
             print("hinghscore table cell init")
-            cell.configureCell(player: players[indexPath.row])
+            if players[indexPath.row].id == LoginManager.shared.userId{
+                cell.configureCell(player: players[indexPath.row], isCurent: true)
+            }
+            else {
+                cell.configureCell(player: players[indexPath.row], isCurent: false)
+            }
             return cell
         }
         return UITableViewCell()

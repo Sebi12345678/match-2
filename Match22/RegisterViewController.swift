@@ -7,7 +7,7 @@
 
 import UIKit
 import Firebase
-
+import FirebaseDatabase
 
 class RegisterViewController: UIViewController {
 
@@ -49,9 +49,11 @@ class RegisterViewController: UIViewController {
         }
         if let email = emailInputField.text, let password = passwordInputField.text{
             Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
-                //let userId = authResult?.user.uid
-                //var ref: DatabaseReference!
-                //ref = Database.database().reference()
+                let userId = authResult?.user.uid
+                var ref: DatabaseReference!
+                ref = Database.database().reference()
+                ref.child("users").child(userId!).setValue(["name": self.nameInputField.text!, "score":0])
+                
                 self.dismiss(animated: true, completion: nil)
             }
         }

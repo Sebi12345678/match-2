@@ -40,6 +40,8 @@ class LoginManager: NSObject {
             }
             self?.isLoggedIn = true
             self?.userId = authResult?.user.uid
+            
+            print("login manager login")
             completion(self?.isLoggedIn ?? false)
         }
         

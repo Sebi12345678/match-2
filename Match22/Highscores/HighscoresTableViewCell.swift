@@ -21,7 +21,10 @@ class HighscoresTableViewCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-    func configureCell(player:Player) {
+    func configureCell(player:Player, isCurent: Bool) {
+        if(isCurent){
+            contentView.backgroundColor = .yellow
+        }
         playerNameLabel.text = player.name
         playerScoreLabel.text = String(player.score ?? 0.0)
     }

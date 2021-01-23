@@ -31,6 +31,7 @@ class LoginViewController: UIViewController {
         {
             LoginManager.shared.login(email: name, pass: pass, completion: {success in
                 if success == true{
+                    print("login go to menu")
                     let mainController = self.storyboard?.instantiateViewController(identifier: "mainApplicationControlller")
                     UIApplication.shared.windows.first?.rootViewController = mainController
                     UIApplication.shared.windows.first?.makeKeyAndVisible()
@@ -50,29 +51,6 @@ class LoginViewController: UIViewController {
                 }
                 
             })
-            Auth.auth().signIn(withEmail: name, password: pass) { [weak self] authResult, error in
-              guard let strongSelf = self else { return }
-                if authResult?.user != nil{
-                    let mainController = strongSelf.storyboard?.instantiateViewController(identifier: "mainApplicationControlller")
-                    UIApplication.shared.windows.first?.rootViewController = mainController
-                    UIApplication.shared.windows.first?.makeKeyAndVisible()
-                    
-                }
-                else
-                {
-                    strongSelf.activityIndicator.stopAnimating()
-                    strongSelf.activityIndicator.isHidden = true
-                    strongSelf.loginButton.isEnabled = true
-                    
-                    let dialogMessage = UIAlertController(title: "Atentie", message: "Nume sau parola gresite", preferredStyle: .alert)
-                    let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
-                      })
-                    dialogMessage.addAction(ok)
-                    strongSelf.present(dialogMessage, animated: true, completion: nil)
-                }
-            }
-            
-            
         }
     }
     

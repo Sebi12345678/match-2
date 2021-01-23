@@ -7,6 +7,7 @@
 import UIKit
 import FirebaseAuth
 import FirebaseStorage
+import FirebaseDatabase
 
 class MeniuViewController: UIViewController {
 
@@ -14,11 +15,27 @@ class MeniuViewController: UIViewController {
     @IBOutlet weak var testImageView: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        userNameLabel.text = LoginManager.shared.userId
         
-        StorageManager.shared.getImage(name: "disruptor.jpg", completion: {
+        var ref: DatabaseReference!
+        ref = Database.database().reference()
+        let userId = LoginManager.shared.userId
+        
+        ref.child("users").child(userId!).observeSingleEvent(of: .value, with: { (snapshot) in
+            // Get user value
+            let value = snapshot.value as? NSDictionary
+            let username = value?["name"] as? String ?? ""
+
+            self.userNameLabel.text = username
+          }) { (error) in
+            print(error.localizedDescription)
+        }
+        
+        
+        //userNameLabel.text = LoginManager.shared.userId
+        
+        /*StorageManager.shared.getImage(name: "disruptor.jpg", completion: {
             image in self.testImageView.image = image
-        })
+        })*/
         
         
         
