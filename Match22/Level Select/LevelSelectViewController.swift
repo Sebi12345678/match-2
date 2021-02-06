@@ -14,14 +14,33 @@ class LevelSelectViewController: UIViewController {
     let numberOfColumns = 3
     
     let difficulties = ["easy": [4, 6],"medium": [5, 8], "hard": [6, 10]]
-
+    var levels: [Level] = [Level]()
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.register(UINib(nibName: "LevelCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "LevelCollectionViewCell")
-
+        
+        DatabaseManager.shared.getData(firstRef:"levels", secondRef: nil, completion:{(dictionary, array) in
+            guard let levels = array else {
+                return
+            }
+            
+            for level in levels {
+                if let levelObject = level as? NSDictionary{
+                if let difficulty = levelObject["difficulty"] as? Int,
+                   let theme = levelObject["theme"] as? String{
+                    self.levels.append(Level(difficulty: difficulty, theme: theme))
+                }
+                }
+            }
+            self.collectionView.reloadData()
+        })
+        
         // Do any additional setup after loading the view.
     }
     func goToGame (boardSize: [Int]?, difficulty: String){
@@ -35,11 +54,13 @@ class LevelSelectViewController: UIViewController {
 }
 extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return levels.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LevelCollectionViewCell", for: indexPath) as! LevelCollectionViewCell
-        cell.configureCell(nrLvl: indexPath.row+1, dif: Int.random(in: 1...3))
+        let level = levels[indexPath.row]
+        
+        cell.configureCell(nrLvl: indexPath.row+1, dif: level.difficulty)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)

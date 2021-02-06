@@ -16,29 +16,15 @@ class MeniuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
         let userId = LoginManager.shared.userId
         
-        ref.child("users").child(userId!).observeSingleEvent(of: .value, with: { (snapshot) in
-            // Get user value
-            let value = snapshot.value as? NSDictionary
-            let username = value?["name"] as? String ?? ""
-
+        DatabaseManager.shared.getData(firstRef:"users", secondRef: userId, completion:{(dictionary, array) in
+            guard let value = dictionary else{
+                return
+            }
+            let username = value["name"] as? String ?? ""
             self.userNameLabel.text = username
-          }) { (error) in
-            print(error.localizedDescription)
-        }
-        
-        
-        //userNameLabel.text = LoginManager.shared.userId
-        
-        /*StorageManager.shared.getImage(name: "disruptor.jpg", completion: {
-            image in self.testImageView.image = image
-        })*/
-        
-        
-        
+        })
     }
     
     @IBAction func logoutAction(_ sender: Any) {

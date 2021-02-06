@@ -23,28 +23,23 @@ class HighscoresViewController: UIViewController {
         
     }
     func getPlayers(){
-        var ref: DatabaseReference!
-        ref = Database.database().reference()
         
-        ref.child("users").observeSingleEvent(of: .value, with: { (snapshot) in
-            if let users = snapshot.value as? NSDictionary{
-                for user in users {
-                    if let userObject = user.value as? NSDictionary, let userId = user.key as? String{
-                    let score = userObject["score"] as? Double
-                    let name = userObject["name"] as? String
-                    
-                        self.players.append(Player(nume: name ?? "", scor: score ?? 0, id: userId))
-                    }
-                }
-                self.players.sort{$0.score ?? 0 > $1.score ?? 0}
-                //self.players.sort {$0.name!.compare($1.name!).rawValue != 0}
-                
-                self.tableView.reloadData()
+        DatabaseManager.shared.getData(firstRef:"users", secondRef: nil, completion:{(dictionary, array) in
+            guard let users = dictionary else{
+                return
             }
+            for user in users {
+                if let userObject = user.value as? NSDictionary, let userId = user.key as? String{
+                let score = userObject["score"] as? Double
+                let name = userObject["name"] as? String
+                
+                    self.players.append(Player(nume: name ?? "", scor: score ?? 0, id: userId))
+                }
+            }
+            self.players.sort{$0.score ?? 0 > $1.score ?? 0}
+            self.tableView.reloadData()
+        })
 
-          }) { (error) in
-            print(error.localizedDescription)
-        }
     }
 }
 extension HighscoresViewController: UITableViewDelegate, UITableViewDataSource{
