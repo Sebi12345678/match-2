@@ -53,6 +53,7 @@
             <size key="customSize" width="210" height="160"/>
             <connections>
                 <outlet property="lvlNoLabel" destination="vkZ-Kl-Ve8" id="f1K-ed-D5z"/>
+                <outlet property="mainView" destination="g9n-aj-tv6" id="SVH-Fg-IOJ"/>
                 <outlet property="starsView" destination="yIB-3C-pNO" id="GKK-nQ-pBb"/>
             </connections>
             <point key="canvasLocation" x="73.913043478260875" y="89.0625"/>

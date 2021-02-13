@@ -30,11 +30,11 @@ class LevelSelectViewController: UIViewController {
                 return
             }
             
-            for level in levels {
+            for (id, level) in levels.enumerated() {
                 if let levelObject = level as? NSDictionary{
                 if let difficulty = levelObject["difficulty"] as? Int,
                    let theme = levelObject["theme"] as? String{
-                    self.levels.append(Level(difficulty: difficulty, theme: theme))
+                    self.levels.append(Level(id: id,difficulty: difficulty, theme: theme))
                 }
                 }
             }
@@ -43,11 +43,12 @@ class LevelSelectViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-    func goToGame (boardSize: [Int]?, difficulty: String){
+    func goToGame (boardSize: [Int]?, difficulty: String, color: UIColor?){
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController, let boardSize = boardSize{
             viewController.numberOfColumns = boardSize[0]
             viewController.numberOfRows = boardSize[1]
             viewController.difficulty = difficulty
+            viewController.color = color
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -60,7 +61,7 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LevelCollectionViewCell", for: indexPath) as! LevelCollectionViewCell
         let level = levels[indexPath.row]
         
-        cell.configureCell(nrLvl: indexPath.row+1, dif: level.difficulty)
+        cell.configureCell(nrLvl: indexPath.row+1, lvl: level)
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
@@ -69,11 +70,11 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
     
         switch cell?.difficulty {
         case 1:
-            goToGame(boardSize: difficulties["easy"], difficulty: "easy")
+            goToGame(boardSize: difficulties["easy"], difficulty: "easy", color: cell?.color)
         case 2:
-            goToGame(boardSize: difficulties["medium"], difficulty: "medium")
+            goToGame(boardSize: difficulties["medium"], difficulty: "medium", color: cell?.color)
         case 3:
-            goToGame(boardSize: difficulties["hard"], difficulty: "hard")
+            goToGame(boardSize: difficulties["hard"], difficulty: "hard", color: cell?.color)
         default:
             break
         }

@@ -15,6 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         FirebaseApp.configure()
+        DatabaseManager.shared.getData(firstRef: "themes", secondRef: nil, completion: {
+            dictionary, _ in
+            DatabaseManager.shared.themeColors = dictionary as? Dictionary<String,String>
+        })
         return true
         
     }

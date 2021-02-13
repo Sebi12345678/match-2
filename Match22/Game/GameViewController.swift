@@ -20,6 +20,7 @@ class GameViewController: UIViewController {
     var matchNumbers = [Int]()
     var score = 0
     var difficulty = "Random"
+    var color: UIColor? = .gray
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +50,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         cell.matchNumber = matchNumbers[indexPath.row]
         //"pictures/\(cell.matchNumber).png"
         print(cell.matchNumber)
+        cell.backCardView.backgroundColor = color
         StorageManager.shared.getImage(name: "pictures/\(cell.matchNumber).png", completion: {
             image in cell.frontCardView.image = image
         })

@@ -11,6 +11,7 @@ import FirebaseDatabase
 class DatabaseManager: NSObject {
     private override init() { }
     static let shared: DatabaseManager = DatabaseManager()
+    var themeColors: [String:String]?
     
     func getData (firstRef:String, secondRef: String?, completion: @escaping(_ dataDictionary: NSDictionary?, _ dataArray: NSArray?) -> Void){
         var ref: DatabaseReference!
