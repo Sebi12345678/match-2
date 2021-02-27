@@ -476,17 +476,23 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4ZH-vl-uF8">
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="4ZH-vl-uF8">
                                 <rect key="frame" x="10" y="88" width="394" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jqZ-Qh-uCu">
-                                        <rect key="frame" x="0.0" y="15" width="197" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="15" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="00:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i1I-0o-Pcg">
+                                        <rect key="frame" x="162.5" y="10" width="69.5" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WfS-fa-h0O">
-                                        <rect key="frame" x="197" y="15" width="197" height="20.5"/>
+                                        <rect key="frame" x="352.5" y="15" width="41.5" height="20.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -514,6 +520,7 @@
                         <outlet property="collectionView" destination="Mnu-MD-4qj" id="YhY-lh-V1Z"/>
                         <outlet property="difficultyLabel" destination="jqZ-Qh-uCu" id="QfG-VW-0vk"/>
                         <outlet property="scoreLabel" destination="WfS-fa-h0O" id="RNk-sL-nRW"/>
+                        <outlet property="timerLabel" destination="i1I-0o-Pcg" id="fWn-QH-0EX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J9i-Ck-Wmg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

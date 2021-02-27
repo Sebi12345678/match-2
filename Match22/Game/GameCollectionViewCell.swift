@@ -29,11 +29,7 @@ class GameCollectionViewCell: UICollectionViewCell {
                 self.frontCardView.transform = CGAffineTransform(scaleX: 0.0, y: 1.0)
                 UIView.animate(withDuration: 1, animations: {
                     self.frontCardView.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
-                }, completion: {_ in if(self.willDisappear)
-                {
-                    self.disappear()
-                }
-                })
+                }, completion: nil)
             }
         })
         
@@ -67,7 +63,7 @@ class GameCollectionViewCell: UICollectionViewCell {
                 self.isRotated = false
                 self.frontCardView.isHidden = true
             })
-            print("hide")
+            //print("hide")
         }
         CATransaction.commit()
         

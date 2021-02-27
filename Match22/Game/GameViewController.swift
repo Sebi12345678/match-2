@@ -9,6 +9,8 @@ import UIKit
 
 class GameViewController: UIViewController {
 
+    
+    @IBOutlet weak var timerLabel: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var difficultyLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -21,6 +23,9 @@ class GameViewController: UIViewController {
     var score = 0
     var difficulty = "Random"
     var color: UIColor? = .gray
+    var startingTime: Date = Date()
+    var timer: Timer?
+    var matchedPairs = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +42,27 @@ class GameViewController: UIViewController {
         matchNumbers.append(contentsOf: secondSequence)
         matchNumbers.shuffle()
         print(matchNumbers)
+        
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+    }
+    @objc func updateTime(){
+        let timeString = timerLabel.text
+        guard let timeArray = timeString?.split(separator: ":") else { return }
+        var minutes = Int(timeArray[0]) ?? 0
+        var seconds = Int(timeArray[1]) ?? 0
+        seconds=seconds+1
+        if seconds == 60{
+            seconds = 0
+            minutes = minutes + 1
+        }
+        let newTimeString = String(format: "%02d:%02d", minutes, seconds)
+        timerLabel.text = newTimeString
+    }
+    override func viewDidDisappear(_ animated: Bool) {
+        timer?.invalidate()
+    }
+    func finishLevel(){
+        navigationController?.popViewController(animated: true)
     }
 }
 extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
@@ -64,7 +90,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
             let firstCell = collectionView.cellForItem(at: selectedCells[0]) as? GameCollectionViewCell
             if(firstCell?.matchNumber == cell?.matchNumber && firstCell != cell)
             {
-                print("un mesaj")
+                matchedPairs = matchedPairs + 1
                 firstCell?.willDisappear = true
                 cell?.willDisappear = true
                 score += 10
@@ -73,6 +99,12 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 if(cell?.isRotated == false){
                     cell?.reveal()
                 }
+                DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: {cell?.disappear()
+                    firstCell?.disappear()
+                    if self.matchedPairs == self.numberOfColumns*self.numberOfRows/2 {
+                        DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {self.finishLevel()})
+                    }
+                })
                 return
             }
             else{
