@@ -62,6 +62,7 @@ class GameViewController: UIViewController {
         timer?.invalidate()
     }
     func finishLevel(){
+        
         navigationController?.popViewController(animated: true)
     }
 }

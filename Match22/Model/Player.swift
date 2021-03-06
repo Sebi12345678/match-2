@@ -9,14 +9,14 @@ import UIKit
 
 class Player: NSObject {
     var name: String
-    var score: Double?
+    var bestScore: Double?
+    var bestLevel: Int?
+    var bestTime: String?
     var id: String
-    var levelsDone: [Int]?
+    var levelsDone: [LevelDone]?
     //override init (){}
-    init (nume: String, scor: Double, id: String){
-        self.name = nume
-        self.score = scor
+    init (name: String, id: String){
+        self.name = name
         self.id = id
     }
-    
 }

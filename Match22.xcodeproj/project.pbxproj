@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		940A531125F3E02200A1341D /* LevelDone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940A531025F3E02200A1341D /* LevelDone.swift */; };
 		940E81A625603FB90020DBBB /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 940E81A525603FB90020DBBB /* RegisterViewController.swift */; };
 		94188DDF254335B300683ABF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94188DDE254335B300683ABF /* AppDelegate.swift */; };
 		94188DE1254335B300683ABF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94188DE0254335B300683ABF /* SceneDelegate.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		940A531025F3E02200A1341D /* LevelDone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelDone.swift; sourceTree = "<group>"; };
 		940E81A525603FB90020DBBB /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		94188DDB254335B300683ABF /* Match22.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Match22.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		94188DDE254335B300683ABF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,6 +170,7 @@
 			children = (
 				94188E0D2543369B00683ABF /* Player.swift */,
 				94C4242D25CEF01B00EF3351 /* Level.swift */,
+				940A531025F3E02200A1341D /* LevelDone.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -318,6 +321,7 @@
 				94DC8B1F2556F274009D03E2 /* LoginManager.swift in Sources */,
 				94188DF82543364700683ABF /* HighscoresViewController.swift in Sources */,
 				94188DDF254335B300683ABF /* AppDelegate.swift in Sources */,
+				940A531125F3E02200A1341D /* LevelDone.swift in Sources */,
 				94D1AB9825696FB3008BE8B9 /* GameCollectionViewCell.swift in Sources */,
 				94188E022543365800683ABF /* LevelCollectionViewCell.swift in Sources */,
 				94C4243125CEF1C200EF3351 /* DatabaseManager.swift in Sources */,

@@ -10,6 +10,8 @@ import UIKit
 class HighscoresTableViewCell: UITableViewCell {
 
     @IBOutlet weak var playerNameLabel: UILabel!
+    @IBOutlet weak var playerLevelLabel: UILabel!
+    @IBOutlet weak var playerTimeLabel: UILabel!
     @IBOutlet weak var playerScoreLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +28,8 @@ class HighscoresTableViewCell: UITableViewCell {
             contentView.backgroundColor = .yellow
         }
         playerNameLabel.text = player.name
-        playerScoreLabel.text = String(player.score ?? 0.0)
+        playerScoreLabel.text = String(player.bestScore ?? 0.0)
+        playerLevelLabel.text = String(player.bestLevel ?? 0)
+        playerTimeLabel.text = player.bestTime ?? "99:99"
     }
 }

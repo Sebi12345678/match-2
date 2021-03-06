@@ -18,6 +18,7 @@ class HighscoresViewController: UIViewController {
         view.backgroundColor = .link
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.tableFooterView = UIView()
         print("hingscore view did load")
         getPlayers()
         
@@ -30,13 +31,18 @@ class HighscoresViewController: UIViewController {
             }
             for user in users {
                 if let userObject = user.value as? NSDictionary, let userId = user.key as? String{
-                let score = userObject["score"] as? Double
+                let bestScore = userObject["bestScore"] as? Double
+                let bestLevel = userObject["bestLevel"] as? Int
+                let bestTime = userObject["bestTime"] as? String
                 let name = userObject["name"] as? String
-                
-                    self.players.append(Player(nume: name ?? "", scor: score ?? 0, id: userId))
+                let player = Player(name: name ?? "", id: userId)
+                    player.bestLevel = bestLevel
+                    player.bestTime = bestTime
+                    player.bestScore = bestScore
+                    self.players.append(player)
                 }
             }
-            self.players.sort{$0.score ?? 0 > $1.score ?? 0}
+            self.players.sort{$0.bestScore ?? 0 > $1.bestScore ?? 0}
             self.tableView.reloadData()
         })
 
