@@ -30,13 +30,12 @@ class LevelSelectViewController: UIViewController {
                 return
             }
             
-            for (id, level) in levels.enumerated() {
-                if let levelObject = level as? NSDictionary{
-                if let difficulty = levelObject["difficulty"] as? Int,
-                   let theme = levelObject["theme"] as? String{
-                    self.levels.append(Level(id: id,difficulty: difficulty, theme: theme))
-                }
-                }
+            do{
+                let json = try JSONSerialization.data(withJSONObject: levels, options: .prettyPrinted)
+                self.levels = try JSONDecoder().decode([Level].self, from: json)
+            }
+            catch{
+                print(error)
             }
             self.collectionView.reloadData()
         })

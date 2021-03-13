@@ -7,15 +7,10 @@
 
 import UIKit
 
-class LevelDone: NSObject {
+struct LevelDone: Codable {
     var id: Int
     var score: Double
     var time: String
-    init (id: Int, score: Double, time: String)
-    {
-        self.id = id
-        self.score = score
-        self.time = time
-    }
+    
 }
 

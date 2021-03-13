@@ -31,17 +31,20 @@ class HighscoresViewController: UIViewController {
             }
             for user in users {
                 if let userObject = user.value as? NSDictionary, let userId = user.key as? String{
-                let bestScore = userObject["bestScore"] as? Double
-                let bestLevel = userObject["bestLevel"] as? Int
-                let bestTime = userObject["bestTime"] as? String
-                let name = userObject["name"] as? String
-                let player = Player(name: name ?? "", id: userId)
-                    player.bestLevel = bestLevel
-                    player.bestTime = bestTime
-                    player.bestScore = bestScore
-                    self.players.append(player)
+                    do{
+                        let json = try JSONSerialization.data(withJSONObject: userObject, options: .prettyPrinted)
+                        var player = try JSONDecoder().decode(Player.self, from: json)
+                        player.id = userId
+                        self.players.append(player)
+                    }
+                    catch{
+                        print(error)
+                    }
                 }
             }
+            
+            
+            
             self.players.sort{$0.bestScore ?? 0 > $1.bestScore ?? 0}
             self.tableView.reloadData()
         })
