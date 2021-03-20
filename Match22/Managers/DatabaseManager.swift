@@ -32,4 +32,13 @@ class DatabaseManager: NSObject {
             print(error.localizedDescription)
         }
     }
+    func saveUser (data: NSDictionary, object: Player? = nil){
+        if let userId = LoginManager.shared.userId{
+            var ref: DatabaseReference!
+            ref = Database.database().reference()
+            ref.child("users").child(userId).setValue(data)
+            LoginManager.shared.userData = object
+            
+        }
+    }
 }

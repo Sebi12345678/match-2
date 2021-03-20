@@ -20,12 +20,13 @@ class GameViewController: UIViewController {
     var selectedCellsCount = 0
     var selectedCells = [IndexPath]()
     var matchNumbers = [Int]()
-    var score = 0
+    var score: Double = 0.0
     var difficulty = "Random"
     var color: UIColor? = .gray
     var startingTime: Date = Date()
     var timer: Timer?
     var matchedPairs = 0
+    var id: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +63,48 @@ class GameViewController: UIViewController {
         timer?.invalidate()
     }
     func finishLevel(){
+        var levels = LoginManager.shared.userData?.levelsDone ?? [LevelDone]()
+        var idToDelete = -1
+        var levelFound = false
+        var player = LoginManager.shared.userData
         
+        for (index, level) in levels.enumerated() {
+            if level.id == self.id && level.score < self.score{
+                idToDelete = index
+            }
+            if self.id == level.id {
+                levelFound = true
+            }
+            if player?.bestScore ?? -Double.infinity < self.score {
+                player?.bestScore = self.score
+                player?.bestTime = self.timerLabel.text
+                player?.bestLevel = self.id
+            }
+        }
+        var newLevel = LevelDone()
+        newLevel.id = id
+        newLevel.score = score
+        newLevel.time = timerLabel.text ?? ""
+        
+        
+        if idToDelete != -1{
+            levels.remove(at: idToDelete)
+            levels.append(newLevel)
+        }
+        if(!levelFound){
+            levels.append(newLevel)
+        }
+        
+        
+        player?.levelsDone = levels
+        do{
+            let playerData = try JSONEncoder().encode(player)
+            let playerDictionary = try JSONSerialization.jsonObject(with: playerData, options: []) as! NSDictionary
+            DatabaseManager.shared.saveUser(data: playerDictionary, object: player)
+        }
+        catch{
+            print(error)
+        }
         navigationController?.popViewController(animated: true)
     }
 }
@@ -103,6 +145,7 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 DispatchQueue.main.asyncAfter(deadline: .now()+1.0, execute: {cell?.disappear()
                     firstCell?.disappear()
                     if self.matchedPairs == self.numberOfColumns*self.numberOfRows/2 {
+                        self.timer?.invalidate()
                         DispatchQueue.main.asyncAfter(deadline: .now()+3, execute: {self.finishLevel()})
                     }
                 })

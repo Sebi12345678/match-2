@@ -52,7 +52,9 @@ class RegisterViewController: UIViewController {
                 let userId = authResult?.user.uid
                 var ref: DatabaseReference!
                 ref = Database.database().reference()
-                ref.child("users").child(userId!).setValue(["name": self.nameInputField.text!, "score":0])
+                ref.child("users").child(userId!).setValue(["name": self.nameInputField.text!])
+                
+                DatabaseManager.shared.saveUser(data: ["name": self.nameInputField.text!])
                 
                 self.dismiss(animated: true, completion: nil)
             }

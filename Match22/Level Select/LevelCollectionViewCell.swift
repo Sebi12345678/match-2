@@ -14,11 +14,12 @@ class LevelCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var starsView: StarsView!
     var difficulty = 0
     var color: UIColor = .gray
+    var id: Int = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func configureCell (nrLvl: Int, lvl: Level){
+    func configureCell (lvl: Level){
         let themes = DatabaseManager.shared.themeColors
         if let levelTheme = lvl.theme {
             let colorHex = themes?[levelTheme]
@@ -26,8 +27,8 @@ class LevelCollectionViewCell: UICollectionViewCell {
             mainView.backgroundColor = color
         }
             
-        lvlNoLabel.text = String(nrLvl)
-        
+        lvlNoLabel.text = String(lvl.id)
+        id = lvl.id
         difficulty = lvl.difficulty
         starsView.setStars(count: difficulty)
     }

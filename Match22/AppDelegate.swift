@@ -19,6 +19,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             dictionary, _ in
             DatabaseManager.shared.themeColors = dictionary as? Dictionary<String,String>
         })
+        DatabaseManager.shared.getData(firstRef:"users", secondRef: LoginManager.shared.userId ?? "", completion:{(dictionary, array) in
+            guard let userObject = dictionary else{
+                return
+            }
+            
+            do{
+                let json = try JSONSerialization.data(withJSONObject: userObject, options: .prettyPrinted)
+                var player = try JSONDecoder().decode(Player.self, from: json)
+                player.id = LoginManager.shared.userId
+                LoginManager.shared.userData = player
+            }
+            catch{
+                print(error)
+            }
+            
+        })
         return true
         
     }
