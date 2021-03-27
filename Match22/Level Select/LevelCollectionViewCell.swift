@@ -12,9 +12,8 @@ class LevelCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var mainView: UIView!
     @IBOutlet weak var lvlNoLabel: UILabel!
     @IBOutlet weak var starsView: StarsView!
-    var difficulty = 0
+    var level: Level?
     var color: UIColor = .gray
-    var id: Int = 0
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -28,9 +27,8 @@ class LevelCollectionViewCell: UICollectionViewCell {
         }
             
         lvlNoLabel.text = String(lvl.id)
-        id = lvl.id
-        difficulty = lvl.difficulty
-        starsView.setStars(count: difficulty)
+        level = lvl
+        starsView.setStars(count: lvl.difficulty)
     }
 
 }

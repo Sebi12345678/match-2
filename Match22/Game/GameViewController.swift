@@ -22,11 +22,13 @@ class GameViewController: UIViewController {
     var matchNumbers = [Int]()
     var score: Double = 0.0
     var difficulty = "Random"
+    var theme = ""
     var color: UIColor? = .gray
     var startingTime: Date = Date()
     var timer: Timer?
     var matchedPairs = 0
     var id: Int = 0
+    var imagePath = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,6 +47,16 @@ class GameViewController: UIViewController {
         print(matchNumbers)
         
         timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
+        
+        
+        StorageManager.shared.exists(theme: theme, reqNumOfPics: numberOfRows*numberOfColumns/2, completion: {
+            success in
+            self.imagePath = "pictures/%@.png"
+            if(success){
+                self.imagePath = "themes/\(self.theme)/%@.jpeg"
+            }
+            self.collectionView.reloadData()
+        })
     }
     @objc func updateTime(){
         let timeString = timerLabel.text
@@ -105,7 +117,13 @@ class GameViewController: UIViewController {
         catch{
             print(error)
         }
-        navigationController?.popViewController(animated: true)
+        let dialogMessage = UIAlertController(title: "Felicitari!", message: "Ai terminat nivelul in " + (self.timerLabel.text ?? "" ) + " si cu scorul: \(self.score)", preferredStyle: .alert)
+        let ok = UIAlertAction(title: "OK", style: .default, handler: { (action) -> Void in
+            self.navigationController?.popViewController(animated: true)
+          })
+        dialogMessage.addAction(ok)
+        self.present(dialogMessage, animated: true, completion: nil)
+        
     }
 }
 extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource{
@@ -120,7 +138,8 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
         //"pictures/\(cell.matchNumber).png"
         print(cell.matchNumber)
         cell.backCardView.backgroundColor = color
-        StorageManager.shared.getImage(name: "pictures/\(cell.matchNumber).png", completion: {
+        let path = String.init(format: imagePath, "\(cell.matchNumber)")
+        StorageManager.shared.getImage(name: path, completion: {
             image in cell.frontCardView.image = image
         })
         return cell
@@ -170,12 +189,10 @@ extension GameViewController: UICollectionViewDelegateFlowLayout, UICollectionVi
                 selectedCells.append(indexPath)
             }
         }
-        //cell?.contentView.backgroundColor = UIColor.black
         
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //return CGSize(width: 10, height: 10)
         let spacingWidth : CGFloat = cellSpacing * (CGFloat (numberOfColumns) + 1.0)
         let widthLeft = collectionView.frame.width - spacingWidth
         let cellWidth = widthLeft/CGFloat(numberOfColumns)

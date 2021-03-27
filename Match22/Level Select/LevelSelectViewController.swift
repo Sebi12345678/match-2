@@ -14,6 +14,7 @@ class LevelSelectViewController: UIViewController {
     let numberOfColumns = 3
     //easy 4, 6
     let difficulties = ["easy": [2, 2],"medium": [5, 8], "hard": [6, 10]]
+    let difficultyNames = ["", "easy", "medium", "hard"]
     var levels: [Level] = [Level]()
     
     
@@ -42,13 +43,17 @@ class LevelSelectViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
-    func goToGame (id: Int, boardSize: [Int]?, difficulty: String, color: UIColor?){
+    func goToGame (level: Level?, boardSize: [Int]?, color: UIColor?){
+        guard let level = level else {
+            return
+        }
         if let viewController = storyboard?.instantiateViewController(withIdentifier: "GameViewController") as? GameViewController, let boardSize = boardSize{
             viewController.numberOfColumns = boardSize[0]
             viewController.numberOfRows = boardSize[1]
-            viewController.difficulty = difficulty
+            viewController.difficulty = difficultyNames[level.difficulty]
+            viewController.theme = level.theme ?? ""
             viewController.color = color
-            viewController.id = id
+            viewController.id = level.id
             navigationController?.pushViewController(viewController, animated: true)
         }
     }
@@ -67,15 +72,15 @@ extension LevelSelectViewController: UICollectionViewDelegateFlowLayout, UIColle
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath)
     {
         let cell = collectionView.cellForItem(at: indexPath) as? LevelCollectionViewCell
-        let levelId = cell?.id ?? 0
+        //let levelId = cell?.id ?? 0
         
-        switch cell?.difficulty {
+        switch cell?.level?.difficulty {
         case 1:
-            goToGame(id: levelId, boardSize: difficulties["easy"], difficulty: "easy", color: cell?.color)
+            goToGame(level: cell?.level, boardSize: difficulties["easy"], color: cell?.color)
         case 2:
-            goToGame(id: levelId, boardSize: difficulties["medium"], difficulty: "medium", color: cell?.color)
+            goToGame(level: cell?.level, boardSize: difficulties["medium"], color: cell?.color)
         case 3:
-            goToGame(id: levelId, boardSize: difficulties["hard"], difficulty: "hard", color: cell?.color)
+            goToGame(level: cell?.level, boardSize: difficulties["hard"], color: cell?.color)
         default:
             break
         }

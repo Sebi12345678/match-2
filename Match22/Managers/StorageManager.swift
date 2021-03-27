@@ -49,4 +49,17 @@ class StorageManager: NSObject {
                     }
                 }
     }
+    func exists (theme: String, reqNumOfPics: Int, completion: @escaping (Bool) -> Void) {
+        let storage = Storage.storage()
+        let pathReference = storage.reference(withPath: "themes/"+theme)
+        pathReference.listAll(completion: {
+            result, error in
+            if result.items.count >= reqNumOfPics {
+                completion(true)
+            }
+            else {
+                completion(false)
+            }
+        })
+    }
 }
