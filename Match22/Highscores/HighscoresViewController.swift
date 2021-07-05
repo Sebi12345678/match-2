@@ -44,7 +44,10 @@ class HighscoresViewController: UIViewController {
             }
             
             
-            
+            self.players = self.players.filter({
+                item in
+                return item.levelsDone?.isEmpty == false
+            })
             self.players.sort{$0.bestScore ?? 0 > $1.bestScore ?? 0}
             self.tableView.reloadData()
         })

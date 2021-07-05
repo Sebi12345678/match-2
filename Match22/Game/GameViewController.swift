@@ -80,6 +80,14 @@ class GameViewController: UIViewController {
         var levelFound = false
         var player = LoginManager.shared.userData
         
+        if player?.bestScore == nil {
+            player?.bestScore = self.score
+            player?.bestTime = self.timerLabel.text
+            player?.bestLevel = self.id
+        }
+        
+        
+        
         for (index, level) in levels.enumerated() {
             if level.id == self.id && level.score < self.score{
                 idToDelete = index

@@ -13,7 +13,7 @@ class LevelSelectViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     let numberOfColumns = 3
     //easy 4, 6
-    let difficulties = ["easy": [2, 2],"medium": [5, 8], "hard": [6, 10]]
+    let difficulties = ["easy": [4, 6],"medium": [5, 8], "hard": [6, 10]]
     let difficultyNames = ["", "easy", "medium", "hard"]
     var levels: [Level] = [Level]()
     
